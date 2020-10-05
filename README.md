@@ -8,7 +8,7 @@ me@russbrooks.com
 
 Pull this repo down.
 
-Have the MFA project running on http://localhost:3002/.
+Have the MFA project running on http://localhost:3002
 
 `cd` into this folder, and:
 
