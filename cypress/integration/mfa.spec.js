@@ -11,16 +11,16 @@ context('MFA', () => {
   before(() => {
     cy.visit('http://localhost:3002')
     cy.clearCookie('remember_device').should('be.null')
-
-    cy.signup(username, password);
   })
 
-  beforeEach(() => {
-    cy.get('#nav').contains('Login').click()
+  it('Signs up for an account.', () => {
+    cy.signup(username, password);
   })
 
   it('Logs a user in on a non-remembered device.', () => {
     cy.clearCookie('remember_device').should('be.null')
+
+    cy.get('#nav').contains('Login').click()
 
     // Shouldn't have to set focus first or use these "force" options.
     // React's form elements are sometimes invisible to Cypress.
@@ -46,6 +46,8 @@ context('MFA', () => {
   })
 
   it('Logs a user in on remembered device.', () => {
+    cy.get('#nav').contains('Login').click()
+
     cy.get('input[name="email"]').focus()
     cy.get('input[name="email"]').type(`${username}`)
     cy.get('input[name="password"]').focus()
