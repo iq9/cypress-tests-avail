@@ -60,6 +60,22 @@ context('MFA', () => {
     cy.get('#nav').contains('Logout').click()
   })
 
+  it('MFA page Cancel button functions as expected.', () => {
+    cy.get('#nav').contains('Login').click()
+    cy.clearCookie('remember_device')
+
+    cy.get('input[name="email"]').focus()
+    cy.get('input[name="email"]').type(`${username}`)
+    cy.get('input[name="password"]').focus()
+    cy.get('input[name="password"]').type(`${password}{enter}`)
+
+    cy.url().should('include', '/pin')
+
+    cy.get('button').contains('Cancel').click()
+
+    cy.url().should('include', '/login')
+  })
+
   after(() => {
     cy.clearCookie('remember_device')
   })
